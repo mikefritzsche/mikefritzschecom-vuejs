@@ -126,12 +126,20 @@ jobs:
 workflows:
   build_and_deploy:
     jobs:
-      - build
-      - deploy-to-digitalocean:
-          requires:
-            - build
+      - test
       - notify-via-slack:
           context:
-            - slack
+            - Slack
           requires:
-            - deploy-to-digitalocean
+            - test
+#  build_and_deploy:
+#    jobs:
+#      - build
+#      - deploy-to-digitalocean:
+#          requires:
+#            - build
+#      - notify-via-slack:
+#          context:
+#            - Slack
+#          requires:
+#            - deploy-to-digitalocean
