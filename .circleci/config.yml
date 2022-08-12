@@ -134,4 +134,4 @@ workflows:
           context:
             - slack
           requires:
-            - build_and_deploy
+            - deploy-to-digitalocean
