@@ -78,6 +78,9 @@ workflows:
   build_and_deploy:
     jobs:
       - build
+      - deploy-to-digitalocean:
+          requires:
+            - build
 #    send-notification:
 #      jobs:
 #        - notify:
