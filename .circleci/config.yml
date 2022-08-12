@@ -62,6 +62,12 @@ jobs:
     executor: app-executor
     steps:
       - run: echo "test my app"
+      - slack/notify:
+          event: fail
+          template: basic_fail_1
+      - slack/notify:
+          event: pass
+          template: success_tagged_deploy_1
 
   notify-via-slack:
     executor: slack-executor
@@ -127,11 +133,7 @@ workflows:
   build_and_deploy:
     jobs:
       - test
-      - notify-via-slack:
-          context:
-            - Slack
-          requires:
-            - test
+
 #  build_and_deploy:
 #    jobs:
 #      - build
