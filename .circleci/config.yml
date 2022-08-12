@@ -1,11 +1,15 @@
-version: 2.1
 orbs:
   slack: circleci/slack@4.10.1
+version: 2.1
 executors:
   app-executor:
     docker:
       - image: cimg/node:16.16
     working_directory: ~/project
+  slack-executor:
+    docker:
+      - image: 'cibuilds/base:latest'
+    resource_class: small
 aliases:
   - &show-current-branch-name
     run:
@@ -37,27 +41,6 @@ aliases:
         zip ../dist.zip -r * .[^.]*
         echo "Build successful"
 jobs:
-#  notify:
-#    docker:
-#      - image  'cimg/base:stable'
-#    steps:
-#      - slack/notify:
-#          custom: |
-#            {
-#              "blocks": [
-#                {
-#                  "type": "section",
-#                  "fields": [
-#                    {
-#                      "type": "plain_text",
-#                      "text": "*This is a text notification*",
-#                      "emoji": true
-#                    }
-#                  ]
-#                }
-#              ]
-#            }
-#          event: always
   build:
     executor: app-executor
     steps:
@@ -74,6 +57,16 @@ jobs:
       - checkout
       - *show-current-branch-name
       - *build-project
+
+  notify-via-slack:
+    executor: slack-executor
+    steps:
+      - slack/notify:
+          message: "${CIRCLE_BRANCH} branch deployment to Digital Ocean is complete."
+          webhook: $CIRCLECI_SLACK_WEBHOOK
+      - slack/status:
+          webhook: $CIRCLECI_SLACK_WEBHOOK
+
 workflows:
   build_and_deploy:
     jobs:
@@ -81,7 +74,8 @@ workflows:
       - deploy-to-digitalocean:
           requires:
             - build
-#    send-notification:
-#      jobs:
-#        - notify:
-#            context: slack-secrets
+      - notify-via-slack:
+          context:
+            - slack
+          requires:
+            - build_and_deploy
