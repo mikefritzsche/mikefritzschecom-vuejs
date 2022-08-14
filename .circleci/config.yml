@@ -86,6 +86,7 @@ jobs:
                     "type": "plain_text",
                     "text": "${CIRCLE_BRANCH} branch deployment to Digital Ocean is complete. 👍",
                     "emoji": true
+                  }
                 },
                 {
                   "type": "section",
@@ -121,7 +122,7 @@ jobs:
                         "type": "plain_text",
                         "text": "View Job"
                       },
-                      "url": "${CIRCLE_BUILD_URL}
+                      "url": "${CIRCLE_BUILD_URL}"
                     }
                   ]
                 }
