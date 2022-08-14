@@ -132,7 +132,8 @@ jobs:
 workflows:
   build_and_deploy:
     jobs:
-      - test
+      - test:
+          context: slack-secrets
 
 #  build_and_deploy:
 #    jobs:
