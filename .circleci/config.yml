@@ -1,5 +1,5 @@
 orbs:
-  rsync: aplazame/rsync@0.0.17
+  rsync: germade/rsync@0.0.1
   slack: circleci/slack@4.10.1
 version: 2.1
 executors:
