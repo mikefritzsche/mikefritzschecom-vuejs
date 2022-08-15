@@ -37,9 +37,7 @@ aliases:
       command: |
         npm install
         npm run build
-        cd dist
-        zip ../dist.zip -r * .[^.]*
-        echo "Build successful"
+
 jobs:
   build:
     executor: app-executor
@@ -50,13 +48,19 @@ jobs:
       - *restore-cache
       - *install-dependencies
       - *save-cache
+      - *build-project
 
   deploy-to-digitalocean:
     executor: app-executor
     steps:
-      - checkout
-      - *show-current-branch-name
-      - *build-project
+      - add_ssh_keys:
+          fingerprints:
+            - 56:79:6b:54:ea:f6:4a:06:74:e7:97:62:f0:a7:27:b1
+      - run:
+          name: Deploy over SSH
+          command: |
+            scp -r dist/* $SERVER_USER_NAME@$SERVER_IP:/opt/containers/mikefritzsche/app/vue
+      
 
   test:
     executor: app-executor
@@ -66,9 +70,9 @@ jobs:
           event: fail
           template: basic_fail_1
 
-      - slack/notify:
-          event: always
-          template: success_tagged_deploy_1
+#      - slack/notify:
+#          event: always
+#          template: success_tagged_deploy_1
       - slack/notify:
           event: always
           custom: |
@@ -86,7 +90,18 @@ jobs:
             }  
 
 workflows:
-  build_and_deploy:
+  deploy_test:
     jobs:
       - test:
           context: slack-secrets
+  build_and_deploy:
+    jobs:
+      - build
+      - deploy-to-digitalocean:
+          requires:
+            - build
+      - notify-via-slack:
+          context:
+            - slack-secrets
+          requires:
+            - deploy-to-digitalocean
