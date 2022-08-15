@@ -133,12 +133,13 @@ workflows:
       - build
       - deploy-to-digitalocean:
           context:
-            do-secrets
+            - do-secrets
+            - slack-secrets
           requires:
             - build
 
-      - notify-via-slack:
-          context:
-            - slack-secrets
-          requires:
-            - deploy-to-digitalocean
+#      - notify-via-slack:
+#          context:
+#            - slack-secrets
+#          requires:
+#            - deploy-to-digitalocean
