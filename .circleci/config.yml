@@ -86,13 +86,13 @@ jobs:
                     "emoji": true
                   }
                 },
-                {
-                  "type": "section",
-                  "fields": [
-                    {
-                      "type": "mrkdwn",
-                      "text": "*Project*:\n${CIRCLE_PROJECT_REPONAME}"
-                    },
+#                {
+#                  "type": "section",
+#                  "fields": [
+#                    {
+#                      "type": "mrkdwn",
+#                      "text": "*Project*:\n${CIRCLE_PROJECT_REPONAME}"
+#                    },
 #                    {
 #                      "type": "mrkdwn",
 #                      "text": "*Branch*:\n${CIRCLE_BRANCH}"
@@ -109,8 +109,8 @@ jobs:
 #                      "type": "mrkdwn",
 #                      "text": "*Build*:\n${CIRCLE_PROJECT_USERNAME}"
 #                    }
-                  ]
-                },
+#                  ]
+#                },
                 {
                   "type": "Actions",
                   "elements": [
