@@ -96,13 +96,15 @@ jobs:
             }  
 
 workflows:
-  deploy_test:
-    jobs:
-      - test:
-          context: slack-secrets
+#  deploy_test:
+#    jobs:
+#      - test:
+#          context: slack-secrets
   build_and_deploy:
     jobs:
-      - build
+      - build:
+          context:
+            do-secrets
       - deploy-to-digitalocean:
           requires:
             - build
