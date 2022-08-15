@@ -112,7 +112,9 @@ jobs:
             echo "UserKnownHostsFile=/dev/null" > ~/.ssh/config
             echo "StrictHostKeyChecking=no">> ~/.ssh/config
             echo $SERVER_USER_NAME
+            echo "ls -la"
             ssh root@167.172.252.239 -v
+            echo "PWD"
 #      - slack/notify:
 #          event: fail
 #          template: basic_fail_1
@@ -121,25 +123,20 @@ jobs:
 #          event: always
 #          template: success_tagged_deploy_1
 workflows:
-#  deploy_test:
-#    jobs:
-#      - test-deploy-to-do:
-#          context:
-#            - do-secrets
-#            - slack-secrets
-
-  build_and_deploy:
+  deploy_test:
     jobs:
-      - build
-      - deploy-to-digitalocean:
+      - test-deploy-to-do:
           context:
             - do-secrets
             - slack-secrets
-          requires:
-            - build
 
-#      - notify-via-slack:
+#  build_and_deploy:
+#    jobs:
+#      - build
+#      - deploy-to-digitalocean:
 #          context:
+#            - do-secrets
 #            - slack-secrets
 #          requires:
-#            - deploy-to-digitalocean
+#            - build
+
