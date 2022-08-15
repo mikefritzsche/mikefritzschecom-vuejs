@@ -62,7 +62,7 @@ jobs:
             echo "disregard ssh known_hosts warnings"
             echo "UserKnownHostsFile=/dev/null" > ~/.ssh/config
             echo "StrictHostKeyChecking=no">> ~/.ssh/config
-            scp -r ~/repo/dist/* $SERVER_USER_NAME@$SERVER_IP:/opt/containers/mikefritzsche/app/vue/dist
+            scp -r ~/repo/dist/* root@167.172.252.239:/opt/containers/mikefritzsche/app/vue/dist
       - slack/notify:
           event: fail
           template: basic_fail_1
