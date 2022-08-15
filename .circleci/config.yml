@@ -52,7 +52,9 @@ jobs:
       - *build-project
 
   deploy-to-digitalocean:
-    executor: app-executor
+    docker:
+      - image: cimg/node:18.7.0
+#    executor: app-executor
     steps:
       - add_ssh_keys:
           fingerprints:
