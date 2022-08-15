@@ -5,7 +5,7 @@ executors:
   app-executor:
     docker:
       - image: cimg/node:16.16
-    working_directory: ~/project
+    working_directory: ~/repo
   slack-executor:
     docker:
       - image: 'cimg/base:stable'
@@ -62,7 +62,8 @@ jobs:
             echo "disregard ssh known_hosts warnings"
             echo "UserKnownHostsFile=/dev/null" > ~/.ssh/config
             echo "StrictHostKeyChecking=no">> ~/.ssh/config
-            scp -r dist/* $SERVER_USER_NAME@$SERVER_IP:/opt/containers/mikefritzsche/app/vue
+            rsync -avce ssh dist/* $SERVER_USER_NAME@$SERVER_IP:/opt/containers/mikefritzsche/app/vue
+#            scp -r dist/* $SERVER_USER_NAME@$SERVER_IP:/opt/containers/mikefritzsche/app/vue
       - slack/notify:
           event: fail
           template: basic_fail_1
