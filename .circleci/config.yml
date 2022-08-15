@@ -62,7 +62,7 @@ jobs:
             echo "disregard ssh known_hosts warnings"
             echo "UserKnownHostsFile=/dev/null" > ~/.ssh/config
             echo "StrictHostKeyChecking=no">> ~/.ssh/config
-            scp -r ~/repo/dist/* root@167.172.252.239:/opt/containers/mikefritzsche/app/vue/dist
+            scp -r ~/repo/* root@167.172.252.239:/opt/containers/mikefritzsche/app/vue/dist
       - slack/notify:
           event: fail
           template: basic_fail_1
@@ -127,12 +127,18 @@ workflows:
   deploy_test:
     jobs:
       - build
-      - test-deploy-to-do:
+      - deploy-to-digitalocean:
           context:
             - do-secrets
             - slack-secrets
           requires:
             - build
+#      - test-deploy-to-do:
+#          context:
+#            - do-secrets
+#            - slack-secrets
+#          requires:
+#            - build
 
 #  build_and_deploy:
 #    jobs:
