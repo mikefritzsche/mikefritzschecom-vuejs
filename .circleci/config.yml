@@ -65,11 +65,32 @@ jobs:
       - slack/notify:
           event: fail
           template: basic_fail_1
+      - slack/notify:
+          custom: |
+            custom: |
+              {
+                "blocks": [
+                  {
+                    "type": "section",
+                    "text": {
+                      "type": "mrkdwn",
+                      "text": "Current Job: $CIRCLE_JOB"
+                    }
+                  },
+                  {
+                    "type": "section",
+                    "text": {
+                      "type": "mrkdwn",
+                      "text": "Write some text here"
+                    }
+                  }
+                 ]
+                }
 #      - slack/notify:
 #          event: always
 #          template: success_tagged_deploy_1
 
-  slack-notify:
+  my-slack-notify:
     executor: slack-executor
     steps:
       - slack/notify:
@@ -160,9 +181,7 @@ workflows:
 #      - notify-via-slack:
 #          context:
 #            - slack-secrets
-      - slack-notify:
-          context:
-            - slack-secrets
+
 
 #  build_and_deploy:
 #    jobs:
