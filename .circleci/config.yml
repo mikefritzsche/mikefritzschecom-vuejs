@@ -105,6 +105,9 @@ jobs:
       - run:
           name: Deploy over SSH
           command: |
+            echo "disregard ssh known_hosts warnings"
+            echo "UserKnownHostsFile=/dev/null" > ~/.ssh/config
+            echo "StrictHostKeyChecking=no">> ~/.ssh/config
             ssh $SERVER_USER_NAME@$SERVER_IP -v
       - slack/notify:
           event: fail
