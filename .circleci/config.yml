@@ -73,16 +73,16 @@ jobs:
           event: always
           custom: |
             {
-                "blocks": [
-                    {
-                      "type": "header",
-                      "text": {
-                        "type": "plain_text",
-                        "text": "${CIRCLE_BRANCH} branch deployment to Digital Ocean is complete. 👍",
-                        "emoji": true
-                      }
-                    },
-                ]
+              "blocks": [
+                {
+                  "type": "header",
+                  "text": {
+                    "type": "plain_text",
+                    "text": "${CIRCLE_BRANCH} branch deployment to Digital Ocean is complete. :tada:",
+                    "emoji": true
+                  }
+                }
+              ]
             }  
 
 workflows:
