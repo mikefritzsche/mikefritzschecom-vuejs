@@ -59,6 +59,7 @@ jobs:
       - add_ssh_keys:
           fingerprints:
             - "ad:44:01:8d:a0:2d:6e:0d:12:b1:40:7c:3b:fa:b9:5c"
+      - run: sudo apt install rsync
       - run:
           name: Deploy over SSH
           command: |
