@@ -46,7 +46,7 @@ aliases:
     run:
       name: Deploy over SSH
       command: |
-        sudo apt install rsync
+        sudo apt-get update && sudo apt-get install -y rsync
         echo "disregard ssh known_hosts warnings"
         echo "UserKnownHostsFile=/dev/null" > ~/.ssh/config
         echo "StrictHostKeyChecking=no">> ~/.ssh/config
