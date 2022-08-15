@@ -1,4 +1,5 @@
 orbs:
+  rsync: germade/rsync@0.0.1
   slack: circleci/slack@4.10.1
 version: 2.1
 executors:
@@ -45,10 +46,12 @@ aliases:
     run:
       name: Deploy over SSH
       command: |
+        sudo apt install rsync
         echo "disregard ssh known_hosts warnings"
         echo "UserKnownHostsFile=/dev/null" > ~/.ssh/config
         echo "StrictHostKeyChecking=no">> ~/.ssh/config
-        scp -r ~/repo/* root@167.172.252.239:/opt/containers/mikefritzsche/app/vue/dist
+        rsync -avce ssh ~/repo/dist/* $SERVER_USER_NAME@$SERVER_IP:/opt/containers/mikefritzsche/app/vue/dist
+#        scp -r ~/repo/* root@167.172.252.239:/opt/containers/mikefritzsche/app/vue/dist
 
 jobs:
   build:
