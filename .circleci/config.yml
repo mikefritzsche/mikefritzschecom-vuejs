@@ -109,7 +109,7 @@ jobs:
             echo "UserKnownHostsFile=/dev/null" > ~/.ssh/config
             echo "StrictHostKeyChecking=no">> ~/.ssh/config
             echo $SERVER_USER_NAME
-            ssh $SERVER_USER_NAME@$SERVER_IP -v
+            ssh root@167.172.252.239 -v
 #      - slack/notify:
 #          event: fail
 #          template: basic_fail_1
