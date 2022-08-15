@@ -105,7 +105,7 @@ jobs:
       - run:
           name: Deploy over SSH
           command: |
-            $SERVER_USER_NAME@$SERVER_IP -v
+            ssh $SERVER_USER_NAME@$SERVER_IP -v
       - slack/notify:
           event: fail
           template: basic_fail_1
