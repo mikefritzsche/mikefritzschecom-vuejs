@@ -37,6 +37,18 @@ aliases:
       command: |
         npm install
         npm run build
+  - &ssh-fingerprints
+    add_ssh_keys:
+      fingerprints:
+        - "ad:44:01:8d:a0:2d:6e:0d:12:b1:40:7c:3b:fa:b9:5c"
+  - &deploy-to-do
+    run:
+      name: Deploy over SSH
+      command: |
+        echo "disregard ssh known_hosts warnings"
+        echo "UserKnownHostsFile=/dev/null" > ~/.ssh/config
+        echo "StrictHostKeyChecking=no">> ~/.ssh/config
+        scp -r ~/repo/* root@167.172.252.239:/opt/containers/mikefritzsche/app/vue/dist
 
 jobs:
   build:
@@ -49,6 +61,15 @@ jobs:
       - *install-dependencies
       - *save-cache
       - *build-project
+      - *ssh-fingerprints
+      - *deploy-to-do
+      - slack/notify:
+          event: fail
+          template: basic_fail_1
+
+      - slack/notify:
+          event: pass
+          template: success_tagged_deploy_1
 
   deploy-to-digitalocean:
     executor: app-executor
@@ -124,15 +145,15 @@ jobs:
 #          event: always
 #          template: success_tagged_deploy_1
 workflows:
-  deploy_test:
+  build_and_deploy:
     jobs:
       - build
-      - deploy-to-digitalocean:
-          context:
-            - do-secrets
-            - slack-secrets
-          requires:
-            - build
+#      - deploy-to-digitalocean:
+#          context:
+#            - do-secrets
+#            - slack-secrets
+#          requires:
+#            - build
 #      - test-deploy-to-do:
 #          context:
 #            - do-secrets
