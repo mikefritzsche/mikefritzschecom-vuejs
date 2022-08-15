@@ -60,7 +60,13 @@ jobs:
           name: Deploy over SSH
           command: |
             scp -r dist/* $SERVER_USER_NAME@$SERVER_IP:/opt/containers/mikefritzsche/app/vue
-      
+      - slack/notify:
+          event: fail
+          template: basic_fail_1
+
+      - slack/notify:
+          event: always
+          template: success_tagged_deploy_1
 
   test:
     executor: app-executor
@@ -100,8 +106,8 @@ workflows:
       - deploy-to-digitalocean:
           requires:
             - build
-      - notify-via-slack:
-          context:
-            - slack-secrets
-          requires:
-            - deploy-to-digitalocean
+#      - notify-via-slack:
+#          context:
+#            - slack-secrets
+#          requires:
+#            - deploy-to-digitalocean
