@@ -69,12 +69,35 @@ jobs:
 #          event: always
 #          template: success_tagged_deploy_1
 
+  slack-notify:
+    executor: slack-executor
+    steps:
+      - slack/notify:
+          custom: |
+            custom: |
+              {
+                "blocks": [
+                  {
+                    "type": "section",
+                    "text": {
+                      "type": "mrkdwn",
+                      "text": "Current Job: $CIRCLE_JOB"
+                    }
+                  },
+                  {
+                    "type": "section",
+                    "text": {
+                      "type": "mrkdwn",
+                      "text": "Write some text here"
+                    }
+                  }
+                 ]
+                }
   notify-via-slack:
     executor: slack-executor
     steps:
       - run: echo "Slack Notification"
       - slack/notify:
-          event: always
           custom: |
             {
               "blocks": [
@@ -86,31 +109,31 @@ jobs:
                     "emoji": true
                   }
                 },
-#                {
-#                  "type": "section",
-#                  "fields": [
-#                    {
-#                      "type": "mrkdwn",
-#                      "text": "*Project*:\n${CIRCLE_PROJECT_REPONAME}"
-#                    },
-#                    {
-#                      "type": "mrkdwn",
-#                      "text": "*Branch*:\n${CIRCLE_BRANCH}"
-#                    },
-#                    {
-#                      "type": "mrkdwn",
-#                      "text": "*When*:\n${date + '%m/%d/%Y %Y}"
-#                    },
-#                    {
-#                      "type": "mrkdwn",
-#                      "text": "*Build*:\n${CIRCLE_BUILD_NUM}"
-#                    },
-#                    {
-#                      "type": "mrkdwn",
-#                      "text": "*Build*:\n${CIRCLE_PROJECT_USERNAME}"
-#                    }
-#                  ]
-#                },
+                {
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Project*:\n${CIRCLE_PROJECT_REPONAME}"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Branch*:\n${CIRCLE_BRANCH}"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*When*:\n${date + '%m/%d/%Y %Y}"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Build*:\n${CIRCLE_BUILD_NUM}"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Build*:\n${CIRCLE_PROJECT_USERNAME}"
+                    }
+                  ]
+                },
                 {
                   "type": "Actions",
                   "elements": [
@@ -126,13 +149,16 @@ jobs:
                 }
               ]
             }
-
+          event: always
 
 workflows:
   build_and_deploy:
     jobs:
       - test:
           context: slack-secrets
+#      - notify-via-slack:
+#          context:
+#            - slack-secrets
       - notify-via-slack:
           context:
             - slack-secrets
