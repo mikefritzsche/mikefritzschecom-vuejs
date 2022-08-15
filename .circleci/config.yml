@@ -160,7 +160,7 @@ workflows:
 #      - notify-via-slack:
 #          context:
 #            - slack-secrets
-      - notify-via-slack:
+      - slack-notify:
           context:
             - slack-secrets
 
