@@ -1,5 +1,4 @@
 orbs:
-  rsync: germade/rsync@0.0.1
   slack: circleci/slack@4.10.1
 version: 2.1
 executors:
@@ -63,7 +62,6 @@ jobs:
             echo "disregard ssh known_hosts warnings"
             echo "UserKnownHostsFile=/dev/null" > ~/.ssh/config
             echo "StrictHostKeyChecking=no">> ~/.ssh/config
-#            rsync -avce ssh dist/* $SERVER_USER_NAME@$SERVER_IP:/opt/containers/mikefritzsche/app/vue
             scp -r dist/* $SERVER_USER_NAME@$SERVER_IP:/opt/containers/mikefritzsche/app/vue
       - slack/notify:
           event: fail
