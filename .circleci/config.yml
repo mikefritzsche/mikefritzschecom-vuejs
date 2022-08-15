@@ -8,7 +8,7 @@ executors:
     working_directory: ~/project
   slack-executor:
     docker:
-      - image: 'cimg/base:stable'
+      - image: 'cibuilds/base:latest'
     resource_class: small
 aliases:
   - &show-current-branch-name
