@@ -205,16 +205,12 @@ workflows:
       - build:
           context:
             - do-secrets
-      - deploy-to-digitalocean:
-          context:
-            - do-secrets
-          requires:
-            - build
+
       - notify-via-slack:
           context:
             - slack-secrets
           requires:
-            - deploy-to-digitalocean
+            - build
 #      - test-deploy-to-do:
 #          context:
 #            - do-secrets
