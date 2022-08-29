@@ -4,8 +4,8 @@
     <div>
       <div class="resume">
         <el-row>
-          <el-col :span="6">
-            <ul>
+          <el-col class="links" :span="6">
+            <ul style="position: sticky; top: 10px;">
               <li
                   v-for="section in sections"
                   :key="section"
@@ -14,15 +14,9 @@
                 {{ section }}
               </li>
             </ul>
-<!--            <div @click="() => window.location.replace('/#skills')">-->
-<!--              <span>Skills</span>-->
-<!--            </div>-->
-<!--            <div @click="() => window.location.replace('/#education')">-->
-<!--              <span>Education</span>-->
-<!--            </div>-->
           </el-col>
           <el-col :span="18">
-            <div class="resume--section">
+            <div class="resume--section" ref="Summary">
               <el-card>
                 <template #header>
                   <h3>Summary</h3>
@@ -34,24 +28,27 @@
 
                 <h4 class="h4">Languages, frameworks and libraries</h4>
                 <p>
-                  Javascript, JSON, Vue, Vuex, Vue-Router, KnockoutJS, AmChart, Nodejs, HTML, SASS/LESS, CSS, PHP, jQuery,
+                  Javascript, JSON, Vue, Vuex, Vue-Router, KnockoutJS, AmChart, Nodejs, HTML, SASS/LESS, CSS, PHP,
+                  jQuery,
                   Lodash, Underscore, Zurb's Foundation, MySQL
                 </p>
                 <h4 class="h4">Tools, Apps and Technologies</h4>
                 <p>
                   Gitlab, Docker, Webpack, Git, Grunt/Gulp, Bash, SSH, Photoshop, Agile methodologies/Scrum,
-                  WebStorm/PHPStorm, SublimeText, Atom, VisualStudio, Note++, Vim, Apache, Nginx, MySQL Workbench Project
+                  WebStorm/PHPStorm, SublimeText, Atom, VisualStudio, Note++, Vim, Apache, Nginx, MySQL Workbench
+                  Project
                 </p>
                 <h4 class="h4">Types</h4>
                 <p>
-                  Interactive UI development, Data Visualization, Dashboard UI development, REST API, API development, UI
+                  Interactive UI development, Data Visualization, Dashboard UI development, REST API, API development,
+                  UI
                   prototyping, UI/UX Design, Responsive UI, Live Video Streaming, Linux administration, SEO, Database
                   Development
                 </p>
               </el-card>
             </div>
 
-            <div class="resume--section">
+            <div class="resume--section" ref="Skills">
               <el-card>
                 <template #header>
                   <h3>Skills</h3>
@@ -59,7 +56,8 @@
 
                 <h4 class="h4">Focus Areas</h4>
                 <p>
-                  Vue, Vuex, Vue Router, Webpack, PHP, Node, TDD Jest/Chai, MySQL/MariaDB, Grunt/Gulp, Git, Docker, ES2015+,
+                  Vue, Vuex, Vue Router, Webpack, PHP, Node, TDD Jest/Chai, MySQL/MariaDB, Grunt/Gulp, Git, Docker,
+                  ES2015+,
                   SASS/SCSS, HTML5, CSS3, Foundation 6
                 </p>
 
@@ -68,22 +66,24 @@
 
               </el-card>
             </div>
-
-            <div class="resume--section">
+            <div class="resume--section" ref="Experience">
               <el-card>
-                <div id="experience" variant='h5' component='h3'>Experience</div>
+                <h3 id="experience" variant='h5' component='h3'>Experience</h3>
                 <div variant='h6' component='h4'>Senior Frontend Engineer | 11/2015 - Current</div>
                 <div variant='h7' component='h5'>Kochava - Sandpoint, ID</div>
                 <ul>
                   <li>
                     Develop API driven, customer facing, single page web application (SPA) of Kochava's mobile ad
-                    attribution, analytics, data marketplace and marketing platform using a Vue, Vuex, Vue Router, SASS, Foundation 6,
+                    attribution, analytics, data marketplace and marketing platform using a Vue, Vuex, Vue Router, SASS,
+                    Foundation 6,
                     and ECMA2015+ stack.
                   </li>
                   <li>
                     Visualize large amounts of data, i.e. time series data, in various types of charts and graphs, or
-                    tabular data formats providing customers a clean, easy to understand insight into their marketing campaign performance.
-                    Create a development, staging and production deployment solution with Webpack, Grunt and Docker in a CI setup.
+                    tabular data formats providing customers a clean, easy to understand insight into their marketing
+                    campaign performance.
+                    Create a development, staging and production deployment solution with Webpack, Grunt and Docker in a
+                    CI setup.
                   </li>
                   <li>
                     Collaborate with project and product managers to set goals and scope projects.
@@ -108,7 +108,8 @@
                   </li>
 
                   <li>
-                    Participated in pre-project analysis and technical assessments to develop user-friendly interface and correct functionality.
+                    Participated in pre-project analysis and technical assessments to develop user-friendly interface
+                    and correct functionality.
                   </li>
 
                   <li>Troubleshooting, testing and fixing issues before software deployment.</li>
@@ -161,7 +162,8 @@
                     Converted PSD mockups into pure hand-written HTML and CSS pages.
                   </li>
                   <li>
-                    Designed, built and maintained websites using authoring or scripting languages, content creation tools
+                    Designed, built and maintained websites using authoring or scripting languages, content creation
+                    tools
                     and digital media.
                   </li>
                 </ul>
@@ -170,7 +172,8 @@
                 <div variant='h7' component='h5'>Mountain Sky Publishing - Sandpoint, ID</div>
                 <ul>
                   <li>
-                    Utilized a custom CMS platform built on PHP, MySQL, HTML/CSS to develop an online in-room information
+                    Utilized a custom CMS platform built on PHP, MySQL, HTML/CSS to develop an online in-room
+                    information
                     website for select hotels.
                   </li>
                   <li>
@@ -189,9 +192,11 @@
                     Utilized a custom content management software solution I built using PHP, MySQL, HTML, CSS to build
                     websites
                     for real estate agents.
-                    Developed custom web application interfaces with HTML and CSS to meet client requirements. Redesigned
+                    Developed custom web application interfaces with HTML and CSS to meet client requirements.
+                    Redesigned
                     and
-                    implemented complete web applications to meet web and industry standards. Wrote application level code
+                    implemented complete web applications to meet web and industry standards. Wrote application level
+                    code
                     to interact with backend code.
                     Converted PSD mockups into templates used in a custom CMS.
                   </li>
@@ -206,7 +211,8 @@
 
                 <ul>
                   <li>
-                    Trained media team members and organized staff teams and tasks. Operated control consoles to regulate
+                    Trained media team members and organized staff teams and tasks. Operated control consoles to
+                    regulate
                     volume
                     levels and sound quality.
                   </li>
@@ -219,7 +225,8 @@
                     workflow.
                   </li>
                   <li>
-                    Processed audio to meet quality standards and played and mixed music for live events. Utilized recording
+                    Processed audio to meet quality standards and played and mixed music for live events. Utilized
+                    recording
                     equipment to record music and speech.
                   </li>
                   <li>
@@ -234,11 +241,13 @@
                     Played backing tracks and special effects during live events.
                   </li>
                   <li>
-                    Worked with church leaders, staff and ministry teams to achieve growth of church and to foster positive
+                    Worked with church leaders, staff and ministry teams to achieve growth of church and to foster
+                    positive
                     community impact.
                   </li>
                   <li>
-                    Visited, counseled and prayed with church members to provide pastoral care. Reached out to unchurched,
+                    Visited, counseled and prayed with church members to provide pastoral care. Reached out to
+                    unchurched,
                     new
                     residents or inactive church members.
                   </li>
@@ -251,7 +260,8 @@
                     promotional materials.
                   </li>
                   <li>
-                    Developed, designed, laid out and produced variety of technical illustrations for brochures, banners and
+                    Developed, designed, laid out and produced variety of technical illustrations for brochures, banners
+                    and
                     signs.
                   </li>
                   <li>
@@ -285,9 +295,9 @@
               </el-card>
             </div>
 
-            <div class="resume--section">
+            <div class="resume--section" ref="Education">
               <el-card>
-                <div id="education" variant='h5' component='h3'>Education and Training</div>
+                <h3 id="education" variant='h5' component='h3'>Education and Training</h3>
                 <div variant='h7' component='h5'>
                   Nevada Union - Grass Valley, CA | High School Diploma 06/1984
                 </div>
@@ -304,27 +314,56 @@
 export default {
   name: 'ResumeComponent',
   methods: {
+    goto(refName) {
+      console.log('goto refName`: ', this.$refs[refName])
+      // return
+      const element = this.$refs[refName];
+      const top = element.offsetTop;
+
+      window.scrollTo({top, left: 0, behavior: 'smooth'});
+    },
     handleSectionClick(e) {
-      window.location.replace(`/#${e.target.textContent.toLowerCase()}`)
+      console.log('section click: ', e.target.textContent.toLowerCase())
+      this.goto(e.target.textContent)
+      // window.location.replace(`/#${e.target.textContent.toLowerCase()}`)
     }
   }
 }
 </script>
 <script setup>
 const sections = [
+  'Summary',
   'Skills',
-  'Education'
+  'Experience',
+  'Education',
 ]
 
 </script>
 <style scoped lang="scss">
+.resume {
+  .links {
+    background-color: darkorange;
+
+    li {
+      color: #fff;
+      font-weight: bold;
+    }
+  }
+}
+
 h4 {
   font-size: var(--el-font-size-medium);
 }
+
 h3 {
   font-size: var(--el-font-size-large);
 }
+
 .card-container {
   padding: .8rem;
+}
+
+.resume--section {
+  margin-bottom: 1rem;
 }
 </style>
