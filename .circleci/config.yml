@@ -16,8 +16,6 @@ aliases:
     run:
       name: Show current branch
       command: echo ${CIRCLE_BRANCH}
-  - &show-node-version
-    run: node --version
   - &restore-cache
     restore_cache:
       keys:
@@ -67,8 +65,8 @@ jobs:
     executor: app-executor
     steps:
       - checkout
-      - show-current-branch-name
-      - build-project
+      - *show-current-branch-name
+      - *build-project
       - *ssh-fingerprints
       - *deploy-to-do
       # - run:
