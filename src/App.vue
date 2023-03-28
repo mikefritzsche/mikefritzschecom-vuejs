@@ -14,7 +14,9 @@
   text-align: center;
   color: #2c3e50;
 }
-
+body, html {
+  background-color: darkorange;
+}
 nav {
   padding: 30px;
 
